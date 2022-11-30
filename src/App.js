@@ -15,10 +15,7 @@ function App() {
             id: uuid(),
             title: "Untitled Note",
             body: "",
-            lastModified: new Date(Date.now()).toLocaleDateString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-            }),
+            lastModified: Date.now(),
         };
 
         setNotes([newNote, ...notes]);
@@ -27,6 +24,24 @@ function App() {
     const onDeleteNote = (id) => {
         setNotes(notes.filter((note) => note.id !== id));
     };
+
+    const onUpdateNote = (updatedNote) => {
+        const updatedNotes = notes.map((note) => {
+            if (note.id === activeNote){
+                return updatedNote;
+            }
+
+            return note;
+        });
+
+        setNotes(updatedNotes);
+    };
+
+
+
+    const getActiveNote = () => {
+        return notes.find((note) => note.id === activeNote);
+    }
 
   return (
     <div className="App">
@@ -37,7 +52,9 @@ function App() {
           activeNote = {activeNote}
           setActiveNote = {setActiveNote}
       />
-      <Main />
+      <Main activeNote={getActiveNote()}
+            onUpdateNote={onUpdateNote}
+      />
     </div>
   );
 }
