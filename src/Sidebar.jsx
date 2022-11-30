@@ -10,14 +10,17 @@ const Sidebar = (props) => {
 
             <div className="app-sidebar-notes">
                 {props.notes.map((note) => (
-                    <div className = "app-sidebar-note">
+                    <div className ={`app-sidebar-note ${note.id === props.activeNote && "active"}`}
+                         onClick={() => props.setActiveNote(note.id)}
+                    >
+
                         <div className="sidebar-note-title">
-                            <strong>TITLE</strong>
-                            <button>Delete</button>
+                            <strong>{note.title}</strong>
+                            <button onClick={() => {props.onDeleteNote(note.id)}}>Delete</button>
                         </div>
 
-                        <p>Note preview</p>
-                        <small>last modified [data]</small>
+                        <p>{note.body && note.body.substr(0, 100) + "..."}</p>
+                        <small>{note.lastModified}</small>
 
                     </div>
                 ))}
