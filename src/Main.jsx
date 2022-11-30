@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from "react-markdown";
 
 const Main = (props) => {
     if (!props.activeNote) return <div className="no-active-note">No Active Note</div>;
@@ -32,7 +33,7 @@ const Main = (props) => {
 
             <div className="app-main-note-preview">
                 <h1 className = "preview-title">{props.activeNote.title}</h1>
-                <div className="markdown-preview">{props.activeNote.body}</div>
+                <ReactMarkdown className="markdown-preview">{props.activeNote.body}</ReactMarkdown>
             </div>
         </div>
     );
